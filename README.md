@@ -10,7 +10,7 @@
 
 | Datum | Themen                                      |
 | ----- | ------------------------------------------- |
-| TBA   | - KickOff, Einleitung und Organisatorisches |
+| 09.10.18 um 14 Uhr in 3.245   | - KickOff, Einleitung und Organisatorisches |
 
 ### Assignments
 
