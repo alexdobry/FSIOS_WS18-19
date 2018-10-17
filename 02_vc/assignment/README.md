@@ -8,4 +8,4 @@ In diesem Assignment soll das Zusammenspiel zwischen Model, View und Controller 
 
 - Wenn das Spiel vorbei ist, kann man es über einen Button neustarten. Hierbei muss der gesamte State des Spiels zurückgesetzt werden
 
-  ![Assigment 02](fsios_assignment02.gif)
+  ![Assigment 02](assignment_02.gif)

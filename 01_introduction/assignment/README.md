@@ -1,15 +1,14 @@
-# FSIOS im WS 18/19
+# Assignment 01
 
-## Organisatorisches
+In diesem Assignment soll man mit Xcode warm werden und die ersten Schritte wagen.
 
-Hier bitte eure Assignments ablegen und innerhalb einer Woche als Pull-Reuqest einreichen. Das Projekt bitte in einem Verzeichnis ablegen, der eurem Namen entspricht. Beispiel: `../assignment/dobrynin/FlippingCard`
+- Implementiert zwei weitere Karten, welche in einer `Outlet-Collection` verwaltet werden
 
-## Assignment
+- Die Tap-Gesture flipped und unflipped die Karten nach wie vor. Allerdings funktioniert die Swipe-Gesture jeweils nur in eine Richtung
 
-### Aufgabe
+  - Swipe nach Rechts macht ein flip
+  - Swipe nach Links macht ein unflip
 
-![Assigment 01](assignment_01.png "Assigment 01")
+- Zudem wird ein Reset-Button eingeführt, welcher das gesamte Spiel (Karten und Counter) zurücksetzt
 
-### Gif
-
-![Assigment 01](assignment_01.gif "Assigment 01")
+  ![Assigment 01](assignment_01.gif)
