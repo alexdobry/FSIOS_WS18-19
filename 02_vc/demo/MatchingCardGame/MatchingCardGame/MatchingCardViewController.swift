@@ -51,6 +51,11 @@ class MatchingCardViewController: UIViewController {
         if let pending = pendingCard {
             if pendingCard(pending, isMatchingWith: card) {
                 flip(sender, to: card)
+                sender.isEnabled = false
+                let pendingButton = cardButtons.first(where: {(button: UIButton) -> Bool in
+                    return button.currentTitle == pending.description
+                })
+                pendingButton?.isEnabled = false
             } else {
                 flip(sender, to: card)
                 
