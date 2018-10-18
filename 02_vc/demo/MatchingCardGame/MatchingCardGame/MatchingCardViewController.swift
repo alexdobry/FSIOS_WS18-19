@@ -81,6 +81,9 @@ class MatchingCardViewController: UIViewController {
         }
         
         globalScore += localScore
+        if localScore == 0 && globalScore > 0{
+            globalScore -= 3
+        }
         
         return localScore > 0
     }
