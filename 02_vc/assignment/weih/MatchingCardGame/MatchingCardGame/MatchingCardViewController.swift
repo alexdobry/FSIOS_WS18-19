@@ -13,9 +13,15 @@ class MatchingCardViewController: UIViewController {
     @IBOutlet var cardButtons: [UIButton]!
     @IBOutlet weak var scoreLabel: UILabel!
     
+    
+    
+    @IBOutlet weak var ButtonReset: UIButton!
+    
     var gameCards = [Card]()
     
     var pendingCard: Card?
+    
+    var userFlippedCard: Bool = false
     
     var globalScore = 0 {
         didSet {
@@ -25,19 +31,7 @@ class MatchingCardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        globalScore = 0
-        
-        var deck = Deck()
-        let numberOfCards = cardButtons.indices
-        
-        for _ in numberOfCards { // matching cardButtons with gameCards (1 to 1)
-            if let card = deck.drawRandomCard() {
-                gameCards.append(card)
-            }
-        }
-        
-        assert(gameCards.count == cardButtons.count)
+        startCardGame()
     }
 
     // first turn: pending
@@ -51,13 +45,19 @@ class MatchingCardViewController: UIViewController {
         if let pending = pendingCard {
             if pendingCard(pending, isMatchingWith: card) {
                 flip(sender, to: card)
+                sender.isEnabled = false
+                let pendingButton = cardButtons.first(where: {(button: UIButton) -> Bool in
+                    return button.currentTitle == pending.description
+                })
+                pendingButton?.isEnabled = false
+                userFlippedCard = true
             } else {
                 flip(sender, to: card)
                 
                 Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
                     self.flip(sender, to: card)
                     
-                    let other = self.cardButton(matching: pending)
+                    let other = self.cardToButton(matching: pending)
                     self.flip(other, to: pending)
                 }
             }
@@ -81,15 +81,58 @@ class MatchingCardViewController: UIViewController {
         }
         
         globalScore += localScore
+        //if localScore == 0 && globalScore > 0{
+            globalScore -= 3
+        //}
         
         return localScore > 0
     }
     
-    func cardButton(matching card: Card) -> UIButton {
+    func cardToButton(matching card: Card) -> UIButton {
         return cardButtons.first(where: { (button: UIButton) -> Bool in
             return button.currentTitle == card.description
         })!
     }
+    
+    func buttonToCard(matching button: UIButton) -> Card {
+        return gameCards.first(where: { (card: Card) -> Bool in
+            return card.description == button.currentTitle
+        })!
+    }
+    
+    func resetCardButtons(){
+        for cardButton: UIButton in cardButtons{
+            if cardButton.isEnabled == false {
+                cardButton.isEnabled = true
+                let matching: Card = buttonToCard(matching: cardButton)
+                flip(cardButton, to: matching)
+            }
+        }
+        userFlippedCard = false
+    }
+    
+    @IBAction func startCardGame() {
+        globalScore = 0
+        
+        var deck = Deck()
+        let numberOfCards = cardButtons.indices
+        
+        if userFlippedCard == true {
+            resetCardButtons()
+        }
+        
+        gameCards = [Card]()
+        
+        for _ in numberOfCards { // matching cardButtons with gameCards (1 to 1)
+            if let card = deck.drawRandomCard() {
+                gameCards.append(card)
+            }
+        }
+        
+        assert(gameCards.count == cardButtons.count)
+    }
+    
+    
     
     func flip(_ button: UIButton, to card: Card) {
         if button.currentTitle == nil {
