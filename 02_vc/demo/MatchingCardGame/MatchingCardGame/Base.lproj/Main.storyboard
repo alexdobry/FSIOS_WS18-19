@@ -144,11 +144,20 @@
                                     <action selector="flipCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="t7q-kF-14v"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nfX-ew-maW">
+                                <rect key="frame" x="105" y="555" width="143" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Restart"/>
+                                <connections>
+                                    <action selector="startCardGame" destination="BYZ-38-t0r" eventType="touchUpInside" id="CE2-kN-GKi"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="ButtonReset" destination="nfX-ew-maW" id="Hdm-hf-0kw"/>
                         <outlet property="scoreLabel" destination="6Sa-Dd-WX5" id="1Kc-zV-Nft"/>
                         <outletCollection property="cardButtons" destination="Oh7-ad-D8H" collectionClass="NSMutableArray" id="181-ee-M30"/>
                         <outletCollection property="cardButtons" destination="W30-EC-XAr" collectionClass="NSMutableArray" id="Ege-Zy-d2d"/>
