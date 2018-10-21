@@ -51,6 +51,8 @@ class MatchingCardViewController: UIViewController {
         if let pending = pendingCard {
             if pendingCard(pending, isMatchingWith: card) {
                 flip(sender, to: card)
+                deactivate(card: card)
+                deactivate(card: pending)
             } else {
                 flip(sender, to: card)
                 
@@ -76,13 +78,23 @@ class MatchingCardViewController: UIViewController {
             localScore += 5
         }
         
-        if pendingCard.rank == card.rank {
+        else if pendingCard.rank == card.rank {
             localScore += 5 * 2
+        }
+        
+        else {
+          localScore = -3
         }
         
         globalScore += localScore
         
         return localScore > 0
+    }
+    
+    func deactivate(card: Card) {
+        let btn = cardButton(matching: card)
+        btn.isEnabled = false
+        btn.alpha = 0.5
     }
     
     func cardButton(matching card: Card) -> UIButton {
@@ -100,6 +112,16 @@ class MatchingCardViewController: UIViewController {
             // front
             button.setBackgroundImage(#imageLiteral(resourceName: "card_back"), for: .normal)
             button.setTitle(nil, for: .normal)
+        }
+    }
+    
+    @IBAction func Reset() {
+        for btn in cardButtons {
+            btn.isEnabled = true
+            btn.setBackgroundImage(#imageLiteral(resourceName: "card_back"), for: .normal)
+            btn.setTitle(nil, for: .normal)
+            btn.alpha = 1
+            globalScore = 0
         }
     }
 }
