@@ -17,6 +17,9 @@ class MatchingCardViewController: UIViewController {
     
     var pendingCard: Card?
     
+    var userFlippedCard: Bool = false
+
+    
     var globalScore = 0 {
         didSet {
             scoreLabel.text = "Score: \(globalScore)"
@@ -26,6 +29,12 @@ class MatchingCardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        startGame()
+
+    }
+    
+    
+    @IBAction func startGame() {
         globalScore = 0
         
         var deck = Deck()
@@ -51,6 +60,12 @@ class MatchingCardViewController: UIViewController {
         if let pending = pendingCard {
             if pendingCard(pending, isMatchingWith: card) {
                 flip(sender, to: card)
+                sender.isEnabled = false
+                let pendingButton = cardButtons.first(where: {(button: UIButton) -> Bool in
+                    return button.currentTitle == pending.description
+                })
+                pendingButton?.isEnabled = false
+                userFlippedCard = true
             } else {
                 flip(sender, to: card)
                 
@@ -69,15 +84,43 @@ class MatchingCardViewController: UIViewController {
         }
     }
     
+    func cardToButton(matching card: Card) -> UIButton {
+        return cardButtons.first(where: { (button: UIButton) -> Bool in
+            return button.currentTitle == card.description
+        })!
+    }
+    
+    func buttonToCard(matching button: UIButton) -> Card {
+        return gameCards.first(where: { (card: Card) -> Bool in
+            return card.description == button.currentTitle
+        })!
+    }
+    
+    func resetCardButtons(){
+        for cardButton: UIButton in cardButtons{
+            if cardButton.isEnabled == false {
+                cardButton.isEnabled = true
+                let matching: Card = buttonToCard(matching: cardButton)
+                flip(cardButton, to: matching)
+            }
+        }
+        userFlippedCard = false
+    }
+    
     func pendingCard(_ pendingCard: Card, isMatchingWith card: Card) -> Bool {
         var localScore = 0
         
         if pendingCard.suit == card.suit {
             localScore += 5
+            
         }
         
         if pendingCard.rank == card.rank {
             localScore += 5 * 2
+        }
+        
+        if (pendingCard.rank != card.rank && pendingCard.suit != card.suit) {
+            localScore -= 3
         }
         
         globalScore += localScore
