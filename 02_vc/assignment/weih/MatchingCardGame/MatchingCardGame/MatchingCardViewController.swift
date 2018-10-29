@@ -41,28 +41,30 @@ class MatchingCardViewController: UIViewController {
     @IBAction func flipCard(_ sender: UIButton) {
         let index = cardButtons.firstIndex(of: sender)!
         let card = gameCards[index]
+        userFlippedCard = true
         
         if let pending = pendingCard {
-            if pendingCard(pending, isMatchingWith: card) {
-                flip(sender, to: card)
-                sender.isEnabled = false
-                let pendingButton = cardButtons.first(where: {(button: UIButton) -> Bool in
-                    return button.currentTitle == pending.description
-                })
-                pendingButton?.isEnabled = false
-                userFlippedCard = true
-            } else {
-                flip(sender, to: card)
-                
-                Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
-                    self.flip(sender, to: card)
+            if card.description != pendingCard?.description {
+                if pendingCard(pending, isMatchingWith: card) {
+                    sender.isUserInteractionEnabled = false
                     
-                    let other = self.cardToButton(matching: pending)
-                    self.flip(other, to: pending)
+                    let pendingButton = cardToButton(matching: pending)
+
+                    pendingButton.isUserInteractionEnabled = false
+                    flip(sender, to: card)
+                    
+                } else {
+                    flip(sender, to: card)
+                    
+                    Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
+                        self.flip(sender, to: card)
+                        
+                        let other = self.cardToButton(matching: pending)
+                        self.flip(other, to: pending)
+                    }
                 }
+                pendingCard = nil
             }
-            
-            pendingCard = nil
         } else {
             flip(sender, to: card)
             pendingCard = card
@@ -80,10 +82,12 @@ class MatchingCardViewController: UIViewController {
             localScore += 5 * 2
         }
         
-        globalScore += localScore
-        //if localScore == 0 && globalScore > 0{
+        
+        if localScore == 0 || localScore >= 15{
             globalScore -= 3
-        //}
+        } else {
+            globalScore += localScore
+        }
         
         return localScore > 0
     }
@@ -101,12 +105,17 @@ class MatchingCardViewController: UIViewController {
     }
     
     func resetCardButtons(){
-        for cardButton: UIButton in cardButtons{
-            if cardButton.isEnabled == false {
-                cardButton.isEnabled = true
+        for cardButton in cardButtons{
+            if !cardButton.isUserInteractionEnabled {
+                cardButton.isUserInteractionEnabled = true
                 let matching: Card = buttonToCard(matching: cardButton)
                 flip(cardButton, to: matching)
             }
+        }
+        if pendingCard != nil {
+            let button = cardToButton(matching: pendingCard!)
+            flip(button, to: pendingCard!)
+            pendingCard = nil
         }
         userFlippedCard = false
     }
