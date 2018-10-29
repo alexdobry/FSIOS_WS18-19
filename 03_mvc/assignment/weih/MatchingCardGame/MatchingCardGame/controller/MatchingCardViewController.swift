@@ -14,6 +14,7 @@ class MatchingCardViewController: UIViewController {
     @IBOutlet var cardViews: [CardView]!
     @IBOutlet weak var scoreLabel: UILabel!
     
+    @IBOutlet weak var restartButton: UIButton!
     // Model
     var game: MatchingCardGame!
     
@@ -42,6 +43,8 @@ class MatchingCardViewController: UIViewController {
     // Helper
     private func initGame() {
         scoreLabel.text = "Score: 0"
+        restartButton.isHidden = true
+        
         game = MatchingCardGame(numberOfCards: cardViews.count)
         game.delegate = self
     }
@@ -85,5 +88,9 @@ extension MatchingCardViewController: MatchingCardGameDelegate {
     
     func pending(_ index: Int, _ card: Card){
         cardViews?[index].card = card
+    }
+    
+    func restart(){
+        restartButton.isHidden = false
     }
 }

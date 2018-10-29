@@ -46,8 +46,29 @@ struct Deck: CustomStringConvertible {
 }
 
 var deck = Deck()
+var cards: [Card] = []
+var count = 0
+var cardsLeft = deck.cards.count
 
-for _ in (0..<52) {
-    deck.drawRandomCard()?.description
-    deck.cards.count
+for _ in (0..<4) {
+    if let card = deck.drawRandomCard() {
+        cards.append(card)
+    }
 }
+
+print(cards)
+
+
+for index1 in (0..<cards.count){
+    for index2 in (0..<4){
+        if index1 != index2 {
+            if cards[index1].rank == cards[index2].rank {
+                count += 1
+            } else if cards[index1].suit == cards[index2].suit {
+                count += 1
+            }
+        }
+    }
+}
+
+print(count)

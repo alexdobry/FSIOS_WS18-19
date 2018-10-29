@@ -13,10 +13,12 @@ protocol MatchingCardGameDelegate {
     func match(_ index: Int, _ pending: Card, _ card: Card)
     func noMatch(_ index: Int, _ pending: Card, _ card: Card)
     func pending(_ index: Int, _ card: Card)
+    func restart()
 }
 
 final class MatchingCardGame {
     private var cards: [Card] = []
+    private var cardsTmp: [Card] = []
     
     private var pendingCard: Card?
     
@@ -38,6 +40,7 @@ final class MatchingCardGame {
                 cards.append(card)
             }
         }
+        cardsTmp = cards
     }
     
     func flipCard(at index: Int) {
@@ -49,6 +52,10 @@ final class MatchingCardGame {
 
                 if pendingCard(pending, isMatchingWith: card) {
                     delegate?.match(index , pending, card)
+                    cardsTmp = cardsTmp.filter { $0.description != pending.description && $0.description != card.description}
+                    if !findMatches() {
+                        delegate?.restart()
+                    }
                 } else {
                     delegate?.noMatch(index, pending, card)
                 }
@@ -74,5 +81,20 @@ final class MatchingCardGame {
         globalScore += localScore
         
         return localScore > 0
+    }
+    
+    private func findMatches() -> Bool {
+        for index1 in (0..<cardsTmp.count){
+            for index2 in (0..<cardsTmp.count){
+                if index1 != index2 {
+                    if cardsTmp[index1].rank == cardsTmp[index2].rank {
+                        return true
+                    } else if cardsTmp[index1].suit == cardsTmp[index2].suit {
+                        return true
+                    }
+                }
+            }
+        }
+        return false
     }
 }
