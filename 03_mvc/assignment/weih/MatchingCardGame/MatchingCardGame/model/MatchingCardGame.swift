@@ -10,13 +10,9 @@ import Foundation
 
 protocol MatchingCardGameDelegate {
     func matchingCardGameScoreDidChange(to value: Int)
-}
-
-enum FlippingCardResult {
-    case pending(Card)
-    case match(first: Card, second: Card)
-    case noMatch(first: Card, second: Card)
-    case alreadySelected(Card)
+    func match(_ index: Int, _ pending: Card, _ card: Card)
+    func noMatch(_ index: Int, _ pending: Card, _ card: Card)
+    func pending(_ index: Int, _ card: Card)
 }
 
 final class MatchingCardGame {
@@ -44,25 +40,23 @@ final class MatchingCardGame {
         }
     }
     
-    func flipCard(at index: Int) -> FlippingCardResult {
+    func flipCard(at index: Int) {
         let card = cards[index]
         
-        if pendingCard == card {
-            return .alreadySelected(card)
-        }
-        
-        if let pending = pendingCard {
-            pendingCard = nil
+        if pendingCard != card {
+            if let pending = pendingCard {
+                pendingCard = nil
 
-            if pendingCard(pending, isMatchingWith: card) {
-                return .match(first: pending, second: card)
+                if pendingCard(pending, isMatchingWith: card) {
+                    delegate?.match(index , pending, card)
+                } else {
+                    delegate?.noMatch(index, pending, card)
+                }
+                
             } else {
-                return .noMatch(first: pending, second: card)
+                pendingCard = card
+                delegate?.pending(index, card)
             }
-            
-        } else {
-            pendingCard = card
-            return .pending(card)
         }
     }
     
