@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina5_9" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Matching Card View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="MatchingCardViewController" customModule="MatchingCardGame" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="fdv-Xh-dQA">
+                                <rect key="frame" x="16" y="60.000000000000028" width="343" height="446.66666666666674"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Sa-Dd-WX5">
+                                        <rect key="frame" x="0.0" y="0.0" width="343" height="31.333333333333332"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                        </variation>
+                                    </label>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="xId-HD-kYY">
+                                        <rect key="frame" x="0.0" y="39.333333333333343" width="343" height="363.33333333333326"/>
+                                        <subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="vrh-jh-AfQ">
+                                                <rect key="frame" x="0.0" y="0.0" width="343" height="115.66666666666667"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rzu-iB-CJU" customClass="CardView" customModule="MatchingCardGame" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="79.666666666666671" height="115.66666666666667"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="Rzu-iB-CJU" secondAttribute="height" multiplier="250:363" id="BgL-Ej-OxH"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7in-NC-P9C" customClass="CardView" customModule="MatchingCardGame" customModuleProvider="target">
+                                                        <rect key="frame" x="87.666666666666671" y="0.0" width="80.000000000000014" height="115.66666666666667"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MMr-lo-nNY" customClass="CardView" customModule="MatchingCardGame" customModuleProvider="target">
+                                                        <rect key="frame" x="175.66666666666666" y="0.0" width="79.666666666666657" height="115.66666666666667"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dPA-DQ-K1g" customClass="CardView" customModule="MatchingCardGame" customModuleProvider="target">
+                                                        <rect key="frame" x="263.33333333333331" y="0.0" width="79.666666666666686" height="115.66666666666667"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="L0j-PX-NDx">
+                                                <rect key="frame" x="0.0" y="123.66666666666669" width="343" height="116"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X8P-QG-bGy" customClass="CardView" customModule="MatchingCardGame" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="79.666666666666671" height="116"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="X8P-QG-bGy" secondAttribute="height" multiplier="250:363" id="pkb-ge-I7G"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x6R-Kp-cLC" customClass="CardView" customModule="MatchingCardGame" customModuleProvider="target">
+                                                        <rect key="frame" x="87.666666666666671" y="0.0" width="80.000000000000014" height="116"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b7V-3L-nsL" customClass="CardView" customModule="MatchingCardGame" customModuleProvider="target">
+                                                        <rect key="frame" x="175.66666666666666" y="0.0" width="79.666666666666657" height="116"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="URY-ms-cFV" customClass="CardView" customModule="MatchingCardGame" customModuleProvider="target">
+                                                        <rect key="frame" x="263.33333333333331" y="0.0" width="79.666666666666686" height="116"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="n8y-NI-2Ny">
+                                                <rect key="frame" x="0.0" y="247.66666666666666" width="343" height="115.66666666666666"/>
+                                                <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UOp-bP-ByQ" customClass="CardView" customModule="MatchingCardGame" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="79.666666666666671" height="115.66666666666667"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="UOp-bP-ByQ" secondAttribute="height" multiplier="250:363" id="NRf-F5-XZJ"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kSO-0E-D6Z" customClass="CardView" customModule="MatchingCardGame" customModuleProvider="target">
+                                                        <rect key="frame" x="87.666666666666671" y="0.0" width="80.000000000000014" height="115.66666666666667"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kb5-It-uBO" customClass="CardView" customModule="MatchingCardGame" customModuleProvider="target">
+                                                        <rect key="frame" x="175.66666666666666" y="0.0" width="79.666666666666657" height="115.66666666666667"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="79q-bj-u34" customClass="CardView" customModule="MatchingCardGame" customModuleProvider="target">
+                                                        <rect key="frame" x="263.33333333333331" y="0.0" width="79.666666666666686" height="115.66666666666667"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </view>
+                                                </subviews>
+                                            </stackView>
+                                        </subviews>
+                                    </stackView>
+                                    <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R4W-l2-3Yb">
+                                        <rect key="frame" x="0.0" y="410.66666666666669" width="343" height="36"/>
+                                        <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                        <state key="normal" title="Restart"/>
+                                        <variation key="heightClass=regular-widthClass=regular">
+                                            <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                        </variation>
+                                        <connections>
+                                            <action selector="restartGame:" destination="BYZ-38-t0r" eventType="touchUpInside" id="GF7-CG-XkG"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="fdv-Xh-dQA" secondAttribute="bottom" constant="16" id="2b8-xB-mX3"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fdv-Xh-dQA" secondAttribute="trailing" constant="16" id="UN0-91-ges"/>
+                            <constraint firstItem="fdv-Xh-dQA" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="Wub-tD-CDv"/>
+                            <constraint firstItem="fdv-Xh-dQA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="Xs3-X7-x5M"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="restartButton" destination="R4W-l2-3Yb" id="ekz-D0-llV"/>
+                        <outlet property="scoreLabel" destination="6Sa-Dd-WX5" id="1Kc-zV-Nft"/>
+                        <outletCollection property="cardViews" destination="X8P-QG-bGy" collectionClass="NSMutableArray" id="NIe-0n-XP0"/>
+                        <outletCollection property="cardViews" destination="79q-bj-u34" collectionClass="NSMutableArray" id="wkU-P2-KVO"/>
+                        <outletCollection property="cardViews" destination="Rzu-iB-CJU" collectionClass="NSMutableArray" id="6Ag-Hd-Ock"/>
+                        <outletCollection property="cardViews" destination="kb5-It-uBO" collectionClass="NSMutableArray" id="a4T-74-L1M"/>
+                        <outletCollection property="cardViews" destination="b7V-3L-nsL" collectionClass="NSMutableArray" id="hgx-jD-JA2"/>
+                        <outletCollection property="cardViews" destination="x6R-Kp-cLC" collectionClass="NSMutableArray" id="Ebh-PJ-iGH"/>
+                        <outletCollection property="cardViews" destination="dPA-DQ-K1g" collectionClass="NSMutableArray" id="54x-Ml-dFC"/>
+                        <outletCollection property="cardViews" destination="URY-ms-cFV" collectionClass="NSMutableArray" id="cec-bs-KZB"/>
+                        <outletCollection property="cardViews" destination="kSO-0E-D6Z" collectionClass="NSMutableArray" id="f9U-9R-wcF"/>
+                        <outletCollection property="cardViews" destination="MMr-lo-nNY" collectionClass="NSMutableArray" id="r1B-ck-P2R"/>
+                        <outletCollection property="cardViews" destination="UOp-bP-ByQ" collectionClass="NSMutableArray" id="wZU-Zd-COw"/>
+                        <outletCollection property="cardViews" destination="7in-NC-P9C" collectionClass="NSMutableArray" id="I2q-We-jl2"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2558" y="-9"/>
+        </scene>
+    </scenes>
+</document>
