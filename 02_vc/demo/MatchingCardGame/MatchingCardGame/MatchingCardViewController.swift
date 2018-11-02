@@ -13,6 +13,8 @@ class MatchingCardViewController: UIViewController {
     @IBOutlet var cardButtons: [UIButton]!
     @IBOutlet weak var scoreLabel: UILabel!
     
+    @IBOutlet weak var ButtonReset: UIButton!
+    
     var gameCards = [Card]()
     
     var pendingCard: Card?
@@ -35,10 +37,17 @@ class MatchingCardViewController: UIViewController {
     
     
     @IBAction func startGame() {
+        
         globalScore = 0
         
         var deck = Deck()
         let numberOfCards = cardButtons.indices
+        
+        if userFlippedCard == true {
+            resetCardButtons()
+        }
+        
+        gameCards = [Card]()
         
         for _ in numberOfCards { // matching cardButtons with gameCards (1 to 1)
             if let card = deck.drawRandomCard() {
