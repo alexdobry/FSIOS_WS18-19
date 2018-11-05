@@ -21,6 +21,7 @@ enum Rank: String, CaseIterable {
 }
 
 struct Card: CustomStringConvertible, Equatable {
+    var matched: Bool
     let suit: Suit
     let rank: Rank
     
@@ -35,7 +36,7 @@ struct Deck: CustomStringConvertible {
     init() {
         for suit in Suit.allCases {
             for rank in Rank.allCases {
-                let card = Card(suit: suit, rank: rank)
+                let card = Card(matched: false, suit: suit, rank: rank)
                 cards.append(card)
             }
         }

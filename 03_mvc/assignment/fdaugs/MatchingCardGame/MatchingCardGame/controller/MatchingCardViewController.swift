@@ -13,6 +13,7 @@ class MatchingCardViewController: UIViewController {
     // View
     @IBOutlet var cardViews: [CardView]!
     @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var resetButton: UIButton!
     
     // Model
     var game: MatchingCardGame!
@@ -44,6 +45,7 @@ class MatchingCardViewController: UIViewController {
         scoreLabel.text = "Score: 0"
         game = MatchingCardGame(numberOfCards: cardViews.count)
         game.delegate = self
+        resetButton.isEnabled = false
     }
     
     func cardView(matching card: Card) -> CardView {
@@ -62,6 +64,10 @@ extension MatchingCardViewController: CardViewDelegate {
 }
 
 extension MatchingCardViewController: MatchingCardGameDelegate {
+    func matchingCardGameOver() {
+        resetButton.isEnabled = true
+    }
+    
     func match(_ index: Int, _ pending: Card, _ card: Card){
         cardViews?[index].card = card
         let other = self.cardView(matching: pending)

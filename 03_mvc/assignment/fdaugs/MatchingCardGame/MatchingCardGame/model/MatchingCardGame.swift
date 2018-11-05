@@ -17,6 +17,7 @@ protocol MatchingCardGameDelegate {
     func noMatch(_ index: Int, _ pending: Card, _ card: Card)
     func pending(_ index: Int, _ card: Card)
     func alreadySelected(index: Int, card: Card)
+    func matchingCardGameOver()
 }
 
 final class MatchingCardGame {
@@ -44,6 +45,13 @@ final class MatchingCardGame {
         }
     }
     
+    private var isMatchingPossible: Bool {
+        let cardsLeft = cards.filter({$0.matched==false})
+        let ranks = Dictionary(grouping: cardsLeft, by: { $0.rank }).contains(where: { $0.value.count >= 2 })
+        let suits = Dictionary(grouping: cardsLeft, by: { $0.suit }).contains(where: { $0.value.count >= 2 })
+        return ranks || suits
+    }
+    
     func flipCard(at index: Int){
         let card = cards[index]
         
@@ -52,6 +60,9 @@ final class MatchingCardGame {
                 pendingCard = nil
                 
                 if pendingCard(pending, isMatchingWith: card) {
+                    let pendingIndex = cards.firstIndex(of: pending)!
+                    cards[pendingIndex].matched = true
+                    cards[index].matched = true
                     delegate?.match(index , pending, card)
                 } else {
                     delegate?.noMatch(index, pending, card)
@@ -63,6 +74,10 @@ final class MatchingCardGame {
             }
         } else {
             delegate?.alreadySelected(index: index, card: card)
+        }
+        
+        if !isMatchingPossible {
+            delegate?.matchingCardGameOver()
         }
     }
     
