@@ -26,6 +26,8 @@ class MatchingCardViewController: UIViewController {
     private func restartGame() {
         scoreLabel.text = "Score: 0"
         restartButton.isHidden = true
+        restartButton.alpha = 0
+        restartButton.transform = CGAffineTransform(scaleX: 0, y: 0)
         
         game = MatchingCardGame(numberOfCards: cardViews.count)
         game.delegate = self
@@ -85,7 +87,13 @@ extension MatchingCardViewController: MatchingCardGameDelegate {
             $0.matched = true
         }
         
-        restartButton.isHidden = false
+        
+        UIView.animate(withDuration: 1, animations: {
+            self.restartButton.isHidden = false
+            self.restartButton.transform = .identity
+            self.restartButton.alpha = 1
+        })
+        
     }
 }
 
