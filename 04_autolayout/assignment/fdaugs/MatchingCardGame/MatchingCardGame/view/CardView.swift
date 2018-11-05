@@ -102,4 +102,15 @@ class CardView: CustomView {
     @IBAction func cardViewTapped(_ sender: UITapGestureRecognizer) {
         delegate?.cardView(self, flippedWith: card)
     }
+    
+    func shake(count : Float = 2, for duration : TimeInterval = 0.25, withTranslation translation : Float = 2) {
+        let animation : CABasicAnimation = CABasicAnimation(keyPath: "transform.translation.x")
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        animation.repeatCount = count
+        animation.duration = duration/TimeInterval(animation.repeatCount)
+        animation.autoreverses = true
+        animation.fromValue = NSValue(cgPoint: CGPoint(x: CGFloat(-translation), y: self.center.y))
+        animation.toValue = NSValue(cgPoint: CGPoint(x: CGFloat(translation), y: self.center.y))
+        layer.add(animation, forKey: "shake")
+    }
 }

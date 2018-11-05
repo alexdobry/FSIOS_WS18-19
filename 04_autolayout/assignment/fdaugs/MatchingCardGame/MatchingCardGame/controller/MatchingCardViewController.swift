@@ -119,7 +119,8 @@ extension MatchingCardViewController: CardViewDelegate {
                 cardView.card = nil
                 self.cardButton(matching: first).card = nil
             }
-        case .alreadySelected: break
+        case .alreadySelected:
+            cardView.shake()
         }
     }
 }
