@@ -61,6 +61,8 @@ final class MatchingCardGame {
                 pendingCard = card
                 delegate?.pending(index, card)
             }
+        } else {
+            delegate?.alreadySelected(index: index, card: card)
         }
     }
     

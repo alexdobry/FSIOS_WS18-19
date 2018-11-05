@@ -62,33 +62,6 @@ extension MatchingCardViewController: CardViewDelegate {
 }
 
 extension MatchingCardViewController: MatchingCardGameDelegate {
-//    func pending(index: Int, card: Card) {
-//        let cView = cardViews?[index]
-//        cView!.card = card
-//
-//    }
-//
-//    func match(index: Int, first: Card, second: Card) {
-//        let cView = cardViews?[index]
-//        cView!.card = first
-//
-//        let other = self.cardView(matching: second)
-//        other.matched = true
-//        cView!.matched = true
-//    }
-//
-//    func noMatch(index: Int, first: Card, second: Card) {
-//        let cView = cardViews?[index]
-//        cView!.card = first
-//
-//        Timer.scheduledTimer(withTimeInterval: 1, repeats: false) { _ in
-//            cView!.card = nil
-//
-//            let other = self.cardView(matching: first)
-//            other.card = nil
-//        }
-//
-//    }
     func match(_ index: Int, _ pending: Card, _ card: Card){
         cardViews?[index].card = card
         let other = self.cardView(matching: pending)
@@ -111,7 +84,7 @@ extension MatchingCardViewController: MatchingCardGameDelegate {
     }
     
     func alreadySelected(index: Int, card: Card) {
-        
+        print("You are dumb!")
     }
     
     func matchingCardGameScoreDidChange(to value: Int) {
