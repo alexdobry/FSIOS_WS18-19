@@ -56,7 +56,10 @@ class SettingsViewController: UIViewController {
     var increase: Int = 0
     var decrease: Int = 0
     var fieldBackground: UIColor?
+    var cardBackground: UIColor?
     var lineWidth: CGFloat?
+    var lineColor: UIColor?
+    var lineNumber: Int = 1
     
     @IBOutlet private weak var increaseStepper: UIStepper!
     @IBOutlet private weak var decreaseStepper: UIStepper!
@@ -65,7 +68,10 @@ class SettingsViewController: UIViewController {
     @IBOutlet private weak var decreaseLabel: UILabel!
     
     @IBOutlet private weak var fieldBackgroundTextField: UITextField!
+    @IBOutlet private weak var cardBackgroundTextField: UITextField!
     @IBOutlet private weak var lineWidthTextField: UITextField!
+    @IBOutlet private weak var lineColorTextField: UITextField!
+    @IBOutlet private weak var lineNumerTextField: UITextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,9 +86,21 @@ class SettingsViewController: UIViewController {
         fieldBackgroundTextField.text = fieldBackground?.toHexString
         textFieldDidEndEditing(fieldBackgroundTextField)
         
+        cardBackgroundTextField.delegate = self
+        cardBackgroundTextField.text = cardBackground?.toHexString
+        textFieldDidEndEditing(cardBackgroundTextField)
+        
         lineWidthTextField.delegate = self
         lineWidthTextField.text = lineWidth?.description
         textFieldDidEndEditing(lineWidthTextField)
+        
+        lineColorTextField.delegate = self
+        lineColorTextField.text = lineColor?.toHexString
+        textFieldDidEndEditing(lineColorTextField)
+        
+        lineNumerTextField.delegate = self
+        lineNumerTextField.text = String(lineNumber)
+        textFieldDidEndEditing(lineNumerTextField)
     }
 
     @IBAction func done(_ sender: Any) {
@@ -113,7 +131,10 @@ class SettingsViewController: UIViewController {
             increase = Int(increaseStepper.value)
             decrease = Int(decreaseStepper.value)
             fieldBackground = mcvc?.view.backgroundColor
+            cardBackground = mcvc?.cardViews.first?.cardColor
             lineWidth = mcvc?.cardViews.first?.lineWidth
+            lineColor = mcvc?.cardViews.first?.lineColor
+            lineNumber = mcvc?.cardViews.first?.lines ?? 1
             
         case Storyboard.EmbedIdentifier:
             mcvc = segue.destination as? MatchingCardViewController
@@ -136,13 +157,20 @@ extension SettingsViewController: UITextFieldDelegate {
         switch textField {
         case fieldBackgroundTextField:
             mcvc?.view.backgroundColor = UIColor(hex: text)
+        case cardBackgroundTextField:
+            mcvc?.cardViews.forEach{$0.cardColor = UIColor(hex: text)}
         case lineWidthTextField:
             if let f = Float(text) {
                 let lineWidth = CGFloat(f)
 
                 mcvc?.cardViews.forEach { $0.lineWidth = lineWidth }
             }
-            
+        case lineColorTextField:
+            mcvc?.cardViews.forEach{$0.lineColor = UIColor(hex: text)}
+        case lineNumerTextField:
+            if let n = Int(text)  {
+                mcvc?.cardViews.forEach{$0.lines = n}
+            }
             
         case _: break
         }

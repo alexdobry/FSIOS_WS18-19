@@ -81,7 +81,10 @@ class MatchingCardViewController: UIViewController {
             settingsVC.increase = game.scoreIncrease
             settingsVC.decrease = game.scoreDecrease
             settingsVC.fieldBackground = view.backgroundColor
+            settingsVC.cardBackground = cardViews.first?.cardColor
             settingsVC.lineWidth = cardViews.first?.lineWidth
+            settingsVC.lineColor = cardViews.first?.lineColor
+            settingsVC.lineNumber = cardViews.first?.lines ?? 1
             
         case _: break
         }
@@ -96,6 +99,9 @@ class MatchingCardViewController: UIViewController {
         view.backgroundColor = settingsVC.fieldBackground
         cardViews.forEach { cardView in
             cardView.lineWidth = settingsVC.lineWidth ?? 5.0
+            cardView.lineColor = settingsVC.lineColor ?? cardView.lineColor
+            cardView.lines = settingsVC.lineNumber
+            cardView.cardColor = settingsVC.cardBackground ?? cardView.cardColor
         }
     }
 }
