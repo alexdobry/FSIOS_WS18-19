@@ -13,12 +13,22 @@ class MatchingCardViewController: UIViewController {
     @IBOutlet var cardViews: [DrawingCardView]!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var restartButton: UIButton!
+    @IBOutlet weak var highScoreBarButton: UIBarButtonItem!
     
     var game: MatchingCardGame!
     
+    
+    var highscore: [String: Int] = [:] {
+        didSet{
+            if highscore.count > 0 { highScoreBarButton.isEnabled = true }
+        }
+    }
+    
+    var round = 1
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
         restartGame()
         dealCards()
     }
@@ -104,6 +114,30 @@ class MatchingCardViewController: UIViewController {
             cardView.cardColor = settingsVC.cardBackground ?? cardView.cardColor
         }
     }
+    
+    @IBAction func showHighScore(_ barButton: UIBarButtonItem) {
+        showByPresenting(barButton)
+    }
+    
+    private func showByPresenting(_ barButton: UIBarButtonItem) {
+        guard let highScoreViewController = storyboard?.instantiateViewController(withIdentifier: "HighScoreViewControllerStoryboard") as? HighScoreViewController else{ return }
+        highScoreViewController.highscore = highscore
+        let navController = UINavigationController(rootViewController: highScoreViewController)
+        present(navController, animated: true, completion: nil)
+    }
+    
+    func addHighScore(_ round:Int, _ score:Int){
+        if highscore.count > 4 {
+            let lowestScore = highscore.min { $0.value < $1.value }
+            if(score > (lowestScore?.value)!){
+                highscore.removeValue(forKey: (lowestScore?.key)!)
+                highscore[String("Round "+String(round))] = score
+            }
+        }else{
+            highscore[String("Round "+String(round))] = score
+        }
+        
+    }
 }
 
 extension MatchingCardViewController: MatchingCardGameDelegate {
@@ -112,7 +146,10 @@ extension MatchingCardViewController: MatchingCardGameDelegate {
         scoreLabel?.text = "Score: \(score)"
     }
     
-    func matchingCardGameDidEnd(with cards: [Card]) {
+    func matchingCardGameDidEnd(with cards: [Card], score: Int) {
+        addHighScore(round, score)
+        round+=1
+        
         print("game over with cards: ", cards)
         
         UIView.animate(

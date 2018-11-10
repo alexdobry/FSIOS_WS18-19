@@ -17,7 +17,7 @@ enum FlippingCardResult {
 
 protocol MatchingCardGameDelegate {
     func matchingCardGameScoreDidChange(to score: Int)
-    func matchingCardGameDidEnd(with cards: [Card])
+    func matchingCardGameDidEnd(with cards: [Card], score: Int)
 }
 
 final class MatchingCardGame {
@@ -93,7 +93,7 @@ final class MatchingCardGame {
         }
         
         if !isMatchingPossible {
-            delegate?.matchingCardGameDidEnd(with: pendingCards)
+            delegate?.matchingCardGameDidEnd(with: pendingCards, score: globalScore)
         }
         
         return result

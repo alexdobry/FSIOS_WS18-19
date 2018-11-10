@@ -17,6 +17,7 @@
 		3FFE229D217A13060076EF66 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE229C217A13060076EF66 /* CardView.swift */; };
 		3FFE229F217A13110076EF66 /* CardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3FFE229E217A13110076EF66 /* CardView.xib */; };
 		3FFE22A1217A139B0076EF66 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3FFE22A0217A139B0076EF66 /* CustomView.swift */; };
+		657C7BC72196D8630000D4BF /* HighScoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657C7BC62196D8630000D4BF /* HighScoreViewController.swift */; };
 		FA8C71D72191CD720080E81A /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA8C71D62191CD720080E81A /* SettingsViewController.swift */; };
 		FAB750AA2191904F00287349 /* DrawingCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAB750A92191904F00287349 /* DrawingCardView.swift */; };
 /* End PBXBuildFile section */
@@ -34,6 +35,7 @@
 		3FFE229C217A13060076EF66 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		3FFE229E217A13110076EF66 /* CardView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CardView.xib; sourceTree = "<group>"; };
 		3FFE22A0217A139B0076EF66 /* CustomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
+		657C7BC62196D8630000D4BF /* HighScoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighScoreViewController.swift; sourceTree = "<group>"; };
 		FA8C71D62191CD720080E81A /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		FAB750A92191904F00287349 /* DrawingCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrawingCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -85,6 +87,7 @@
 			children = (
 				3F6DD99121760DA5006D748D /* MatchingCardViewController.swift */,
 				FA8C71D62191CD720080E81A /* SettingsViewController.swift */,
+				657C7BC62196D8630000D4BF /* HighScoreViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -189,6 +192,7 @@
 				3F6DD98021760D66006D748D /* AppDelegate.swift in Sources */,
 				3FFE229D217A13060076EF66 /* CardView.swift in Sources */,
 				FA8C71D72191CD720080E81A /* SettingsViewController.swift in Sources */,
+				657C7BC72196D8630000D4BF /* HighScoreViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
