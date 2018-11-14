@@ -24,4 +24,4 @@ In diesem Assignment sollen CollectionViews geübt werden
 
   - Der Cache muss selbstverständlich im `ImageLoader` implementiert werden. Glücklicherweise ist der ImageLoader bereits ein Singleton und teilt seinen State (Objekte im Cache) mit allen Objekten (Cells), die ihn verwenden
 
-- ![Assigment 06](assignment06.gif)
+![Assigment 06](assignment06.gif)
