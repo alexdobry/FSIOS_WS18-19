@@ -137,6 +137,7 @@ extension MatchingCardViewController: CardViewDelegate {
                 cardView.card = nil
                 self.cardButton(matching: first).card = nil
             }
+            // Already Selected on Controller
         case .alreadySelected(let card):            
             let selectedCard = self.cardButton(matching: card)
             selectedCard.alreadySelected = true

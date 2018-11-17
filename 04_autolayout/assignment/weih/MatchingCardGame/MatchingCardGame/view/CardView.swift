@@ -66,7 +66,7 @@ class CardView: CustomView {
             self.isUserInteractionEnabled = !self.matched
         }
     }
-    
+    // Already Selected on View
     @IBInspectable
     var alreadySelected: Bool = false {
         didSet {
