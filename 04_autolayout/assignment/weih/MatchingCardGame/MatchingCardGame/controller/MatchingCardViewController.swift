@@ -26,6 +26,7 @@ class MatchingCardViewController: UIViewController {
     private func restartGame() {
         scoreLabel.text = "Score: 0"
         
+        // Restart Button Reseting alpha on Controller
         restartButton.alpha = 0
         
         game = MatchingCardGame(numberOfCards: cardViews.count)
@@ -86,6 +87,7 @@ extension MatchingCardViewController: MatchingCardGameDelegate {
             $0.matched = true
         }
         
+        // Restart Button Animation on Controller
         UIView.animate(withDuration: 0.5,
                        delay: 0.0,
                        options: [],
