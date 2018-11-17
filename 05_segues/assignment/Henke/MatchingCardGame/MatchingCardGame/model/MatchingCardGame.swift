@@ -101,6 +101,7 @@ final class MatchingCardGame {
         
         if !isMatchingPossible {
             delegate?.matchingCardGameDidEnd(with: pendingCards)
+            highScore = globalScore
         }
         
         return result
@@ -122,7 +123,7 @@ final class MatchingCardGame {
         }
         
         globalScore += localScore
-        highScore = globalScore
+       // highScore = globalScore
         
         return localScore > 0
     }

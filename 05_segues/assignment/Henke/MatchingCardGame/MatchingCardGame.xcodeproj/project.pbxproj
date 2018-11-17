@@ -86,8 +86,8 @@
 			isa = PBXGroup;
 			children = (
 				3F6DD99121760DA5006D748D /* MatchingCardViewController.swift */,
-				FA8C71D62191CD720080E81A /* SettingsViewController.swift */,
 				7711548B2196025F00DE93FD /* HighscoreViewController.swift */,
+				FA8C71D62191CD720080E81A /* SettingsViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";

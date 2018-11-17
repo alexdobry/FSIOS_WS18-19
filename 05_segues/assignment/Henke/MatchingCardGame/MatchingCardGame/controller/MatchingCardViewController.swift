@@ -13,8 +13,12 @@ class MatchingCardViewController: UIViewController {
     @IBOutlet var cardViews: [DrawingCardView]!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var restartButton: UIButton!
+    @IBOutlet weak var highScoreButton: UIBarButtonItem!
     
-    private var scoreArray:[Int] = [0]
+    private var scoreArray: [String] = []
+    private var gameCounter = 0
+    private var currentHighscore = 0
+    
     
     
     var game: MatchingCardGame!
@@ -24,6 +28,8 @@ class MatchingCardViewController: UIViewController {
         
         restartGame()
         dealCards()
+        self.navigationItem.rightBarButtonItem?.isEnabled = false
+        
     }
     
     @IBAction func restartGame(_ sender: Any) {
@@ -34,6 +40,7 @@ class MatchingCardViewController: UIViewController {
     private func restartGame() {
         scoreLabel?.text = "Score: 0"
         restartButton?.isHidden = true
+        gameCounter += 1
         
         game = MatchingCardGame(numberOfCards: cardViews.count)
         game.delegate = self
@@ -87,9 +94,9 @@ class MatchingCardViewController: UIViewController {
             settingsVC.lineWidth = cardViews.first?.lineWidth
             settingsVC.lines = cardViews.first?.lines
         case "HighscoreSegue":
-            let highscoreVC = segue.destination as! HighscoreViewController
+            let nav2 = segue.destination as! UINavigationController
+            let highscoreVC = nav2.topViewController as! HighscoreViewController
             highscoreVC.highscoreArray = scoreArray
-            
         case _: break
         }
     }
@@ -117,26 +124,45 @@ class MatchingCardViewController: UIViewController {
     }
     
     
-    @IBAction func presentHighscoreView(_ sender: Any) {
-        guard let highscoreVC = storyboard?.instantiateViewController(withIdentifier: "HighScoreViewControllerStoryboard") as? HighscoreViewController else{ return }
-        highscoreVC.highscoreArray = scoreArray
-    }
+//    @IBAction func HighScoreNavigationButton(_ sender: UIBarButtonItem) {
+//        showHighscoreViewController(sender)
+//    }
+//
+//    private func showHighscoreViewController(_ barButton: UIBarButtonItem) {
+//        guard let highscoreVC = storyboard?.instantiateViewController(withIdentifier: "HighscoreViewController") as? HighscoreViewController else{ return }
+//        highscoreVC.highscoreArray = scoreArray
+//        let navigationController = UINavigationController(rootViewController: highscoreVC)
+//        present(navigationController, animated: true, completion: nil)
+//    }
     
-    
-}
 
+    @IBAction func highScoreButton(_ sender: UIButton) {
+        if gameCounter == 0 {
+            sender.alpha = 0
+        }
+        else {
+            sender.alpha = 1
+        }
+    }
+}
 
 
 extension MatchingCardViewController: MatchingCardGameDelegate {
 
     func matchingCardGameScoreDidChange(to score: Int) {
         scoreLabel?.text = "Score: \(score)"
-    
     }
     
     func addNewHighscore(to highscore: Int) {
         if highscore > 0{
-            scoreArray.append(highscore)
+            if highscore >= currentHighscore {
+                scoreArray.insert("Runde \(gameCounter): \(highscore) Punkte", at: 0)
+            }
+            else{
+                scoreArray.append("Runde \(gameCounter): \(highscore) Punkte")
+            }
+            currentHighscore = highscore
+            self.navigationItem.rightBarButtonItem?.isEnabled = true
         }
     }
     
