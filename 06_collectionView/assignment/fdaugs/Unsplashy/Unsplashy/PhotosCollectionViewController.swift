@@ -107,6 +107,17 @@ class PhotosCollectionViewController: UICollectionViewController, UICollectionVi
         navigationController?.pushViewController(viewControllerToCommit, animated: true)
     }
     
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "DetailPhotoViewControllerID") as? DetailPhotoViewController,
+            let cell = collectionView.cellForItem(at: indexPath) as? PhotoCollectionViewCell,
+            let image = cell.image
+        else { return }
+        vc.image = image
+        vc.preferredContentSize = image.size
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    
     // MARK: Editing
     
     override func setEditing(_ editing: Bool, animated: Bool) {
