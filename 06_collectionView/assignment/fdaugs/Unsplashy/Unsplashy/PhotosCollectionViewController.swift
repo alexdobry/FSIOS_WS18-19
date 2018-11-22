@@ -12,6 +12,26 @@ private let reuseIdentifier = "Cell"
 
 class PhotosCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UIViewControllerPreviewingDelegate, PhotoCollectionViewCellDelegate {
  
+    @IBOutlet weak var zoomInBtn: UIBarButtonItem!
+    @IBOutlet weak var zoomOutBtn: UIBarButtonItem!
+    
+    private var itemsInLine: CGFloat  = 3 {
+        didSet{
+            let layout = UICollectionViewFlowLayout()
+            collectionView.setCollectionViewLayout(layout, animated: true)
+            if(itemsInLine > 5){
+                zoomOutBtn.isEnabled = false
+            } else {
+                zoomOutBtn.isEnabled = true
+            }
+            if(itemsInLine == 1){
+                zoomInBtn.isEnabled = false
+            } else {
+                zoomInBtn.isEnabled = true
+            }
+        }
+    }
+    
     private var urls: [URL] = []
     
     override func viewDidLoad() {
@@ -51,7 +71,6 @@ class PhotosCollectionViewController: UICollectionViewController, UICollectionVi
     
     private let itemSpacing: CGFloat = 3
     private let sectionSpacing: CGFloat = 3
-    private let itemsInLine: CGFloat = 3
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return sectionSpacing
@@ -98,6 +117,9 @@ class PhotosCollectionViewController: UICollectionViewController, UICollectionVi
             photoCell.isEditing = editing
             photoCell.delegate = editing ? self : nil
         }
+        
+        zoomInBtn.isEnabled = !editing
+        zoomOutBtn.isEnabled = !editing
     }
     
     func deleteButtonWasTapped(on cell: PhotoCollectionViewCell) {
@@ -106,4 +128,24 @@ class PhotosCollectionViewController: UICollectionViewController, UICollectionVi
         urls.remove(at: indexPath.row)
         collectionView.deleteItems(at: [indexPath])
     }
+    
+    @IBAction func zoomInButtonWasTapped(_ sender: UIBarButtonItem) {
+        
+        if(itemsInLine < 2){
+            sender.isEnabled = false
+        }else{
+            itemsInLine -= 1
+        }
+    }
+    
+    @IBAction func zoomOutButtonWasTapped(_ sender: UIBarButtonItem) {
+        
+        if(itemsInLine > 5){
+            sender.isEnabled = false
+        }else{
+            itemsInLine += 1
+        }
+    }
+    
+    
 }
