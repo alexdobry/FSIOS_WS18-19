@@ -44,7 +44,13 @@ class PhotoCollectionViewCell: UICollectionViewCell {
         
         ImageLoader.default.image(by: url) { image in
             if self.cookieUrl == url {
-                self.photoImageView.image = image
+                
+            self.photoImageView.alpha = 0
+            self.photoImageView.image = image
+            UIView.animate(withDuration: 1, animations: {
+                self.photoImageView.alpha = 1
+            })
+                
             }
         }
     }
