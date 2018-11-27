@@ -30,10 +30,10 @@ class ScoreViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        writeHighScore()
+        writeScore()
     }
     
-    func writeHighScore(){
+    func writeScore(){
         
         var text = ""
         
