@@ -13,8 +13,12 @@ class MatchingCardViewController: UIViewController {
     @IBOutlet var cardViews: [DrawingCardView]!
     @IBOutlet weak var scoreLabel: UILabel!
     @IBOutlet weak var restartButton: UIButton!
+    @IBOutlet weak var scoreButton: UIButton!
     
     var game: MatchingCardGame!
+    var scores: [Int] = []
+
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,6 +35,9 @@ class MatchingCardViewController: UIViewController {
     private func restartGame() {
         scoreLabel?.text = "Score: 0"
         restartButton?.isHidden = true
+        
+        scoreButton.isEnabled = false
+        scoreButton.tintColor = UIColor.clear
         
         game = MatchingCardGame(numberOfCards: cardViews.count)
         game.delegate = self
@@ -98,6 +105,14 @@ class MatchingCardViewController: UIViewController {
             cardView.lineWidth = settingsVC.lineWidth ?? 5.0
         }
     }
+    
+    
+    @IBAction private func submitScores(_ barButton: UIBarButtonItem) {
+        guard let ScoreViewController = storyboard?.instantiateViewController(withIdentifier: "ScoreViewControllerStoryboard") as? ScoreViewController else{ return }
+        ScoreViewController.scores = scores
+        let navController = UINavigationController(rootViewController: ScoreViewController)
+        present(navController, animated: true, completion: nil)
+    }
 }
 
 extension MatchingCardViewController: MatchingCardGameDelegate {
@@ -106,8 +121,18 @@ extension MatchingCardViewController: MatchingCardGameDelegate {
         scoreLabel?.text = "Score: \(score)"
     }
     
-    func matchingCardGameDidEnd(with cards: [Card]) {
+    func matchingCardGameDidEnd(with cards: [Card], globalScore: Int) {
         print("game over with cards: ", cards)
+        
+        scores.append(globalScore)
+        scores.sort(by: >)
+        print(scores)
+        scoreButton.isEnabled = true
+        scoreButton.tintColor = nil
+//        submitScores(scoreButton)
+//        print(globalScore)
+        
+        
         
         UIView.animate(
             withDuration: 0.5,
@@ -130,6 +155,7 @@ extension MatchingCardViewController: MatchingCardGameDelegate {
     }
 }
 
+    
 extension MatchingCardViewController: DrawingCardViewDelegate {
     
     private func cardButton(matching card: Card) -> DrawingCardView {
