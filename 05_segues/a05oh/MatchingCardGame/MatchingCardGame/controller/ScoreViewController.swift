@@ -39,18 +39,9 @@ class ScoreViewController: UIViewController {
         
         scores.forEach { print($0)
             
-            text = text + String(($0)) + "\n"
+            text = text + "\($0) Points \n"
         }
+        print(text)
         scoreLabel.text = text
     }
 }
-    
-//extension ScoreViewController: HighScoreDelegate {
-//
-//    func finalScoreWas(with globalScore: Int) {
-//        print("Resultat:", globalScore)
-//
-//    }
-//
-//
-//}
