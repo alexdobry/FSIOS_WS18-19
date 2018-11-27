@@ -21,6 +21,10 @@
 | 04.12.18 um 14 Uhr in 3.245 | Persistenz mit CoreData                          |
 | 11.12.18 um 14 Uhr in 3.245 | SplitViewController und App-Theming              |
 | 18.12.18 um 14 Uhr in 3.245 | *frei?*                                          |
+| 08.01.19 um 14 Uhr in 3.245 | Memory-Management, Networking & JSON-Parsing     |
+| 15.01.19 um 14 Uhr in 3.245 | Notifications & Background-Updates               |
+| 22.01.19 um 14 Uhr in 3.245 | 3rd-Party Libraries                              |
+| 29.01.19 um 14 Uhr in 3.245 | Framework & App-Extensions (Siri Intents)        |
 
 ### Assignments
 
