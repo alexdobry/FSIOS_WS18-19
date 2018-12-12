@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="17G3025" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Tag" representedClassName=".Tag" syncable="YES">
+        <attribute name="color" attributeType="Transformable" valueTransformerName="" syncable="YES"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="title" attributeType="String" syncable="YES"/>
+        <relationship name="todos" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Todo" inverseName="tags" inverseEntity="Todo" syncable="YES"/>
+    </entity>
+    <entity name="Todo" representedClassName=".Todo" syncable="YES">
+        <attribute name="completed" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="created" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="favorite" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="finished" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="id" attributeType="UUID" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="task" attributeType="String" syncable="YES"/>
+        <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="todos" inverseEntity="Tag" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Todo" positionX="1272.13671875" positionY="64.359375" width="128" height="150"/>
+        <element name="Tag" positionX="1518.1171875" positionY="64.79296875" width="128" height="105"/>
+    </elements>
+</model>
